@@ -1,10 +1,9 @@
+require('dotenv').config()
 import express from 'express'
 
 let file = './index.ts'
-
 let app = express()
 
 app.use(express.json())
 
-
-app.listen(3000, () => console.log(file, `Listening on port ${3000}`))
+app.listen(process.env.SRV_PORT, () => console.log(file, `Listening on port ${process.env.SRV_PORT}`))
