@@ -1,7 +1,7 @@
 import moment from 'moment'
 
-const emailValidator = require('../../ts/validations/email')
-const dateValidator = require('../../ts/validations/date')
+const emailValidator = require('../../core/domain/validations/email')
+const dateValidator = require('../../core/domain/validations/date')
 
 //Email
 test('check if the email is valid', () => {

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "dev": "tsnd --inspect --ignore-watch node_modules ts/index.ts"
+    "dev": "tsnd --inspect --ignore-watch node_modules src/infra/http/server.ts"
   },
   "repository": {
     "type": "git",
