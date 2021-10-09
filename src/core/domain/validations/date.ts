@@ -1,7 +1,7 @@
 import moment from 'moment';
 
-function validDate(date: any) {
+function validDate(date: Date | string | moment.Moment): boolean {
   return moment(date).isValid();
 }
 
-module.exports = validDate;
+export { validDate };

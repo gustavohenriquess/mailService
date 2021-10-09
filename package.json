@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "dev": "tsnd -r dotenv/config --inspect --ignore-watch node_modules src/infra/http/server.ts"
+    "dev": "tsnd -r dotenv/config --inspect --ignore-watch node_modules src/infra/http/server.ts",
+    "eslint:fix": "npx eslint . --ext .ts --fix"
   },
   "repository": {
     "type": "git",
