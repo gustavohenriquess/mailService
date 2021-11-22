@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { CreateMailboxController } from '../application/CreateMailboxController';
+import { CreateEmailBoxController } from '../application/CreateEmailBoxController';
 const router = Router();
 
-router.post('/emailbox', new CreateMailboxController().create);
+router.post('/email/box', new CreateEmailBoxController().create);
 
 export { router };
