@@ -6,45 +6,56 @@ import { clientError, created } from '../../infra/HttpResponse';
 import { validEmail } from '../../infra/validations/email';
 
 export interface IMailbox {
-  mb_id: 'string';
-  mb_name: 'string';
-  mb_email: 'string';
-  mb_password: 'string';
-  mb_host: 'string';
-  mb_port: number;
-  mb_secure: boolean;
+  eb_id: 'string';
+  eb_name: 'string';
+  eb_email: 'string';
+  eb_password: 'string';
+  eb_host: 'string';
+  eb_port: number;
+  eb_secure: boolean;
+  eb_active: boolean;
 }
 
 class CreateMailboxController {
   async create(request: Request, response: Response) {
-    let { mb_id, mb_name, mb_email, mb_password, mb_host, mb_port, mb_secure } =
-      request.body;
+    let {
+      eb_id,
+      eb_name,
+      eb_email,
+      eb_password,
+      eb_host,
+      eb_port,
+      eb_secure,
+      eb_active,
+    } = request.body;
 
-    if (!mb_id) mb_id = v4();
+    if (!eb_id) eb_id = v4();
+    if (!eb_active) eb_active = true;
 
-    if (!validEmail(mb_email)) {
+    if (!validEmail(eb_email)) {
       let result = await clientError(new Error('Invalid email'));
       return response.status(result.statusCode).json(result.body);
     }
 
-    if (typeof mb_secure !== 'boolean') {
+    if (typeof eb_secure !== 'boolean') {
       let result = await clientError(new Error('Invalid secure value'));
       return response.status(result.statusCode).json(result.body);
     }
 
-    if (typeof mb_port !== 'number') {
+    if (typeof eb_port !== 'number') {
       let result = await clientError(new Error('Invalid secure value'));
       return response.status(result.statusCode).json(result.body);
     }
 
     const mailbox: IMailbox = {
-      mb_id,
-      mb_name,
-      mb_email,
-      mb_password,
-      mb_host,
-      mb_port,
-      mb_secure,
+      eb_id,
+      eb_name,
+      eb_email,
+      eb_password,
+      eb_host,
+      eb_port,
+      eb_secure,
+      eb_active,
     };
 
     await new CreateMailboxService().create(mailbox);
