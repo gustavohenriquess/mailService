@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import { v4 } from 'uuid';
 
-import { CreateMailboxService } from '../repositories/CreateMailboxService';
+import { CreateEmailBoxService } from '../repositories/CreateEmailBoxService';
 import { clientError, created } from '../../infra/HttpResponse';
 import { validEmail } from '../../infra/validations/email';
 
-export interface IMailbox {
+export interface IEmailbox {
   eb_id: 'string';
   eb_name: 'string';
   eb_email: 'string';
@@ -16,7 +16,7 @@ export interface IMailbox {
   eb_active: boolean;
 }
 
-class CreateMailboxController {
+class CreateEmailBoxController {
   async create(request: Request, response: Response) {
     let {
       eb_id,
@@ -47,7 +47,7 @@ class CreateMailboxController {
       return response.status(result.statusCode).json(result.body);
     }
 
-    const mailbox: IMailbox = {
+    const mailbox: IEmailbox = {
       eb_id,
       eb_name,
       eb_email,
@@ -58,11 +58,11 @@ class CreateMailboxController {
       eb_active,
     };
 
-    await new CreateMailboxService().create(mailbox);
+    await new CreateEmailBoxService().create(mailbox);
     let result = await created();
 
     return response.status(result.statusCode).json(result.body);
   }
 }
 
-export { CreateMailboxController };
+export { CreateEmailBoxController };
