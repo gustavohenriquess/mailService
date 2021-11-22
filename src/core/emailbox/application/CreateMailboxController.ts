@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import { uuid } from 'uuidv4';
+import { v4 } from 'uuid';
 
 import { CreateMailboxService } from '../repositories/CreateMailboxService';
-import { created } from '../../infra/HttpResponse';
+import { clientError, created } from '../../infra/HttpResponse';
+import { validEmail } from '../../infra/validations/email';
 
 export interface IMailbox {
   mb_id: 'string';
@@ -10,7 +11,7 @@ export interface IMailbox {
   mb_email: 'string';
   mb_password: 'string';
   mb_host: 'string';
-  mb_port: 'string';
+  mb_port: number;
   mb_secure: boolean;
 }
 
@@ -19,7 +20,22 @@ class CreateMailboxController {
     let { mb_id, mb_name, mb_email, mb_password, mb_host, mb_port, mb_secure } =
       request.body;
 
-    if (!mb_id) mb_id = uuid();
+    if (!mb_id) mb_id = v4();
+
+    if (!validEmail(mb_email)) {
+      let result = await clientError(new Error('Invalid email'));
+      return response.status(result.statusCode).json(result.body);
+    }
+
+    if (typeof mb_secure !== 'boolean') {
+      let result = await clientError(new Error('Invalid secure value'));
+      return response.status(result.statusCode).json(result.body);
+    }
+
+    if (typeof mb_port !== 'number') {
+      let result = await clientError(new Error('Invalid secure value'));
+      return response.status(result.statusCode).json(result.body);
+    }
 
     const mailbox: IMailbox = {
       mb_id,
@@ -32,7 +48,7 @@ class CreateMailboxController {
     };
 
     await new CreateMailboxService().create(mailbox);
-    const result = created();
+    let result = await created();
 
     return response.status(result.statusCode).json(result.body);
   }
