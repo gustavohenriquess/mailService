@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { validDate } from '../../infra/validations/date';
+import { validDate } from '../../core/infra/validations/date';
 
 describe('check if the date is valid', () => {
   test('with new Date()', () => {
