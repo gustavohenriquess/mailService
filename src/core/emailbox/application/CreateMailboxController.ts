@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 import { uuid } from 'uuidv4';
 
 import { CreateMailboxService } from '../repositories/CreateMailboxService';
+import { created } from '../../infra/HttpResponse';
 
-interface IMailbox {
+export interface IMailbox {
   mb_id: 'string';
   mb_name: 'string';
   mb_email: 'string';
@@ -30,8 +31,10 @@ class CreateMailboxController {
       mb_secure,
     };
 
-    const result = await new CreateMailboxService().create(mailbox);
-    return response.json(result);
+    await new CreateMailboxService().create(mailbox);
+    const result = created();
+
+    return response.status(result.statusCode).json(result.body);
   }
 }
 
