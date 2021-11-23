@@ -7,6 +7,7 @@
     "test": "jest",
     "build": "tsc",
     "dev": "tsnd -r dotenv/config --inspect --ignore-watch node_modules src/infra/http/server.ts",
+    "start": "node ./dist/infra/http/server.js ",
     "eslint:fix": "npx eslint . --ext .ts --fix"
   },
   "repository": {
