@@ -1,0 +1,31 @@
+version: '3'
+services:
+    email:
+        build:
+            dockerfile: ./Dockerfile
+            context: .
+        image: gustavohenriques/email
+        container_name: email
+        environment:
+          - TZ=America/Sao_Paulo
+        ports:
+            - "3000:3000"
+        networks: 
+            - production-network
+        depends_on:
+            - mongo
+
+    mongo:
+      image: mongo
+      environment:
+        - TZ=America/Sao_Paulo
+      volumes:
+        - ./mongodb_data:/data/db
+      ports:
+        - "27017:27017"
+      networks: 
+        - production-network
+
+networks: 
+    production-network:
+        driver: bridge
