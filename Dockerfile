@@ -7,16 +7,20 @@ LABEL version = 1
 # Create app directory
 WORKDIR /app/mail
 
-# Install app dependencies
-COPY package*.json ./
-RUN yarn install
 
 # Copy app source code
 COPY . .
 
+# Install app dependencies
+RUN yarn install
+
+# Build app
+RUN yarn build
+
+# Environment variables
 ENV SRV_PORT=3000
 
 #Expose port and start application
 EXPOSE $SRV_PORT
-CMD ["yarn", "build"]
-CMD [ "yarn", "start" ]
+
+ENTRYPOINT [ "yarn", "start" ]
