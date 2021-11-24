@@ -14,6 +14,7 @@ services:
             - production-network
         depends_on:
             - mongo
+            - postgres
 
     mongo:
       image: mongo
@@ -23,6 +24,15 @@ services:
         - ./mongodb_data:/data/db
       ports:
         - "27017:27017"
+      networks: 
+        - production-network
+
+    postgres:
+      image: postgres
+      environment:
+        POSTGRES_PASSWORD: postgres
+      ports:
+        - "5432:5432"
       networks: 
         - production-network
 
