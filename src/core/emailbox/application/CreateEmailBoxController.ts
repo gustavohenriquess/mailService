@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { v4 } from 'uuid';
 
 import { CreateEmailBoxService } from '../repositories/CreateEmailBoxService';
-import { clientError, created } from '../../infra/HttpResponse';
+import * as httpResponse from '../../infra/HttpResponse';
 import { validEmail } from '../../infra/validations/email';
 
 export interface IEmailbox {
@@ -16,7 +16,7 @@ export interface IEmailbox {
   eb_active: boolean;
 }
 
-class CreateEmailBoxController {
+export class CreateEmailBoxController {
   async create(request: Request, response: Response) {
     let {
       eb_id,
@@ -33,17 +33,21 @@ class CreateEmailBoxController {
     if (!eb_active) eb_active = true;
 
     if (!validEmail(eb_email)) {
-      let result = await clientError(new Error('Invalid email'));
+      let result = await httpResponse.clientError(new Error('Invalid email'));
       return response.status(result.statusCode).json(result.body);
     }
 
     if (typeof eb_secure !== 'boolean') {
-      let result = await clientError(new Error('Invalid secure value'));
+      let result = await httpResponse.clientError(
+        new Error('Invalid secure value'),
+      );
       return response.status(result.statusCode).json(result.body);
     }
 
     if (typeof eb_port !== 'number') {
-      let result = await clientError(new Error('Invalid secure value'));
+      let result = await httpResponse.clientError(
+        new Error('Invalid secure value'),
+      );
       return response.status(result.statusCode).json(result.body);
     }
 
@@ -59,10 +63,8 @@ class CreateEmailBoxController {
     };
 
     await new CreateEmailBoxService().create(mailbox);
-    let result = await created();
+    let result = await httpResponse.created();
 
     return response.status(result.statusCode).json(result.body);
   }
 }
-
-export { CreateEmailBoxController };
