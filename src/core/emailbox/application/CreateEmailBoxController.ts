@@ -6,45 +6,37 @@ import * as httpResponse from '../../infra/HttpResponse';
 import { validEmail } from '../../infra/validations/email';
 
 export interface IEmailbox {
-  eb_id: 'string';
-  eb_name: 'string';
-  eb_email: 'string';
-  eb_password: 'string';
-  eb_host: 'string';
-  eb_port: number;
-  eb_secure: boolean;
-  eb_active: boolean;
+  id: 'string';
+  name: 'string';
+  email: 'string';
+  password: 'string';
+  host: 'string';
+  port: number;
+  secure: boolean;
+  active: boolean;
 }
 
 export class CreateEmailBoxController {
   async create(request: Request, response: Response) {
-    let {
-      eb_id,
-      eb_name,
-      eb_email,
-      eb_password,
-      eb_host,
-      eb_port,
-      eb_secure,
-      eb_active,
-    } = request.body;
+    let { id, name, email, password, host, port, secure, active } =
+      request.body;
 
-    if (!eb_id) eb_id = v4();
-    if (!eb_active) eb_active = true;
+    if (!id) id = v4();
+    if (!active) active = true;
 
-    if (!validEmail(eb_email)) {
+    if (!validEmail(email)) {
       let result = await httpResponse.clientError(new Error('Invalid email'));
       return response.status(result.statusCode).json(result.body);
     }
 
-    if (typeof eb_secure !== 'boolean') {
+    if (typeof secure !== 'boolean') {
       let result = await httpResponse.clientError(
         new Error('Invalid secure value'),
       );
       return response.status(result.statusCode).json(result.body);
     }
 
-    if (typeof eb_port !== 'number') {
+    if (typeof port !== 'number') {
       let result = await httpResponse.clientError(
         new Error('Invalid secure value'),
       );
@@ -52,14 +44,14 @@ export class CreateEmailBoxController {
     }
 
     const mailbox: IEmailbox = {
-      eb_id,
-      eb_name,
-      eb_email,
-      eb_password,
-      eb_host,
-      eb_port,
-      eb_secure,
-      eb_active,
+      id,
+      name,
+      email,
+      password,
+      host,
+      port,
+      secure,
+      active,
     };
 
     await new CreateEmailBoxService().create(mailbox);
