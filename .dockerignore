@@ -1,5 +1,6 @@
 node_modules
 mongodb_data
-postgres_data
+prisma/migrations
 dist
 .env.test
+.env.example
