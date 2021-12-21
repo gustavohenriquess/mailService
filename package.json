@@ -10,7 +10,7 @@
     "test": "jest",
     "build": "tsc",
     "dev": "tsnd -r dotenv/config --inspect --ignore-watch node_modules src/infra/http/server.ts",
-    "start": "node ./dist/infra/http/server.js ",
+    "start": "yarn prisma:migrate && node ./dist/infra/http/server.js ",
     "eslint:fix": "npx eslint . --ext .ts --fix",
     "prisma:migrate": "npx prisma migrate dev --name development"
   },
