@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
     email:
         build:
@@ -33,6 +33,8 @@ services:
         POSTGRES_PASSWORD: postgres
       ports:
         - "5432:5432"
+      volumes:
+        - ./postgres_data:/var/lib/postgresql/data
       networks: 
         - production-network
 

@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Emailbox" (
+CREATE TABLE "EmailBox" (
     "id_db" TEXT NOT NULL,
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -10,8 +10,8 @@ CREATE TABLE "Emailbox" (
     "secure" BOOLEAN NOT NULL,
     "active" BOOLEAN NOT NULL,
 
-    CONSTRAINT "Emailbox_pkey" PRIMARY KEY ("id_db")
+    CONSTRAINT "EmailBox_pkey" PRIMARY KEY ("id_db")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Emailbox_id_key" ON "Emailbox"("id");
+CREATE UNIQUE INDEX "EmailBox_id_key" ON "EmailBox"("id");

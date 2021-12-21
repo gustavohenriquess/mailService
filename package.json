@@ -4,13 +4,15 @@
   "description": "mail service in nodeJS",
   "main": "index.js",
   "scripts": {
-    "docker-build": "docker build . -t gustavohenriques/email",
-    "docker-up": "docker-compose up -d --force-recreate",
+    "docker:build": "docker build . -t gustavohenriques/email",
+    "docker:up": "docker-compose up -d --force-recreate",
+    "docker:down": "docker-compose down",
     "test": "jest",
     "build": "tsc",
     "dev": "tsnd -r dotenv/config --inspect --ignore-watch node_modules src/infra/http/server.ts",
     "start": "node ./dist/infra/http/server.js ",
-    "eslint:fix": "npx eslint . --ext .ts --fix"
+    "eslint:fix": "npx eslint . --ext .ts --fix",
+    "prisma:migrate": "npx prisma migrate dev --name development"
   },
   "repository": {
     "type": "git",

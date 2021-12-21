@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Emailbox {
+model EmailBox {
   id_db    String  @id @default(uuid())
   id       String  @unique
   name     String

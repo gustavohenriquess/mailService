@@ -1,9 +1,17 @@
 import { IEmailbox } from '../application/CreateEmailBoxController';
+import PrismaClient from '../../infra/prisma';
 
-class CreateEmailBoxService {
-  async create(mailbox: IEmailbox) {
-    return mailbox;
+export class CreateEmailBoxService {
+  async create(emailBox: IEmailbox) {
+    PrismaClient.emailBox
+      .create({
+        data: emailBox,
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .then((emailBox) => {
+        return;
+      });
   }
 }
-
-export { CreateEmailBoxService };
