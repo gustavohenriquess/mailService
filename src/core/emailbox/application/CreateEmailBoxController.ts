@@ -31,16 +31,30 @@ export class CreateEmailBoxController {
 
     if (typeof secure !== 'boolean') {
       let result = await httpResponse.clientError(
-        new Error('Invalid secure value'),
+        new Error('The "secure" field has an invalid boolean value.'),
       );
       return response.status(result.statusCode).json(result.body);
     }
 
     if (typeof port !== 'number') {
       let result = await httpResponse.clientError(
-        new Error('Invalid secure value'),
+        new Error('The "port" field has an invalid number value.'),
       );
       return response.status(result.statusCode).json(result.body);
+    }
+
+    let stringFields = [name, email, password, host];
+    let fieldsName = ['name', 'email', 'password', 'host'];
+
+    for (var i in stringFields) {
+      if (typeof stringFields[i] !== 'string') {
+        let result = await httpResponse.clientError(
+          new Error(
+            `The "${fieldsName[i]}" field has an invalid number value.`,
+          ),
+        );
+        return response.status(result.statusCode).json(result.body);
+      }
     }
 
     const mailbox: IEmailbox = {
