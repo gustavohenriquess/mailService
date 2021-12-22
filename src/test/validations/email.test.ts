@@ -1,4 +1,4 @@
-import { validEmail } from '../../core/domain/validations/email';
+import { validEmail } from '../../core/infra/validations/email';
 
 test('check if the email is valid', () => {
   expect(validEmail('gustavosilva@hotmail.com')).toBe(true);

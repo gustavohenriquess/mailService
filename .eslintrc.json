@@ -29,5 +29,6 @@
       }
     ]
   },
-  "parser": "@typescript-eslint/parser"
+  "parser": "@typescript-eslint/parser",
+  "prefer-const": [true, {"destructuring": "all"}]
 }

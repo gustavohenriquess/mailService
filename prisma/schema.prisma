@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model EmailBox {
+  id_db    String  @id @default(uuid())
+  id       String  @unique
+  name     String
+  email    String
+  password String
+  host     String
+  port     Int
+  secure   Boolean
+  active   Boolean
+}

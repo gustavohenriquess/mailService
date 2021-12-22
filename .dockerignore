@@ -1,0 +1,6 @@
+node_modules
+mongodb_data
+prisma/migrations
+dist
+.env.test
+.env.example
