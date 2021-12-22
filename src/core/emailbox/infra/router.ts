@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { CreateEmailBoxController } from '../application/CreateEmailBoxController';
 import { DeleteEmailBoxController } from '../application/DeleteEmailBoxController';
 import { GetEmailBoxController } from '../application/GetEmailBoxController';
-import { UpdateEmailBoxController } from '../application/UpdateEmailBoxController copy';
+import { UpdateEmailBoxController } from '../application/UpdateEmailBoxController';
 
 const router = Router();
 
