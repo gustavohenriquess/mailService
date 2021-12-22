@@ -1,5 +1,5 @@
 import express from 'express';
-import { router as routerEmailBox } from '../../core/emailbox/interface/router';
+import { router as routerEmailBox } from '../../core/emailbox/infra/router';
 
 const app = express();
 
