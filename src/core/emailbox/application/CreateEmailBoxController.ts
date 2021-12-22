@@ -4,17 +4,7 @@ import { v4 } from 'uuid';
 import { CreateEmailBoxService } from '../repositories/CreateEmailBoxService';
 import * as httpResponse from '../../infra/HttpResponse';
 import { validEmail } from '../../infra/validations/email';
-
-export interface IEmailbox {
-  id: 'string';
-  name: 'string';
-  email: 'string';
-  password: 'string';
-  host: 'string';
-  port: number;
-  secure: boolean;
-  active: boolean;
-}
+import { IEmailBox } from '../interface/IEmailBox';
 
 export class CreateEmailBoxController {
   async create(request: Request, response: Response) {
@@ -57,7 +47,7 @@ export class CreateEmailBoxController {
       }
     }
 
-    const mailbox: IEmailbox = {
+    const mailbox: IEmailBox = {
       id,
       name,
       email,
